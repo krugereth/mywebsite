@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <!-- Left Side: Video -->
+    <div class="left-side">
+        <video id="background-video" autoplay muted loop>
+            <source src="akira.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Mute Button -->
+        <button id="mute-button" class="mute-button">Unmute</button>
+    </div>
+    <!-- Right Side: Project Links -->
+    <div class="right-side">
+        <div class="content">
+            <h1>Ayush Patel</h1>
+            <ul>
+                <li><a href="https://x.com/stackingn0thing" target="_blank">Twitter</a></li>
+                <li><a href="https://github.com" target="_blank">Github</a></li>
+                <li><a href="https://www.instagram.com/ayushpatel.31/" target="_blank">Instagram</a></li>
+                <!-- Add more project links as needed -->
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- JavaScript for handling mute button -->
+<script>
+    const video = document.getElementById('background-video');
+    const muteButton = document.getElementById('mute-button');
+
+    // Function to update mute button text
+    function updateMuteButton() {
+        if (video.muted) {
+            muteButton.innerText = 'Unmute';
+        } else {
+            muteButton.innerText = 'Mute';
+        }
+    }
+
+    // Event listener for mute button
+    muteButton.addEventListener('click', function() {
+        video.muted = !video.muted;
+        updateMuteButton();
+    });
+
+    // Initialize mute button text
+    updateMuteButton();
+</script>
+</body>
+</html>
