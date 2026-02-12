@@ -2,57 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Projects</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link to the CSS file -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffc0cb; /* Pink background */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        #noBtn {
+            background-color: #f44336; /* Red */
+            color: white;
+            position: relative; /* Starts normal, becomes absolute later */
+        }
+
+        /* Success message styles (hidden by default) */
+        #success-message {
+            display: none;
+        }
+        
+        #success-message img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <!-- Left Side: Video -->
-    <div class="left-side">
-        <video id="background-video" autoplay muted loop>
-            <source src="akira.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Mute Button -->
-        <button id="mute-button" class="mute-button">Unmute</button>
-    </div>
-    <!-- Right Side: Project Links -->
-    <div class="right-side">
-        <div class="content">
-            <h1>Ayush Patel</h1>
-            <ul>
-                <li><a href="https://x.com/stackingn0thing" target="_blank">Twitter</a></li>
-                <li><a href="https://github.com/krugereth/mywebsite" target="_blank">Github</a></li>
-                <li><a href="https://www.instagram.com/ayushpatel.31/" target="_blank">Instagram</a></li>
-                <!-- Add more project links as needed -->
-            </ul>
+
+    <div class="container">
+        <div id="question-box">
+            <h1>Will you be my Valentine? 💖</h1>
+            <button class="btn" id="yesBtn">Yes</button>
+            <button class="btn" id="noBtn">No</button>
+        </div>
+
+        <div id="success-message">
+            <h1>Yay! I knew you'd say yes! 🥰</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eW55b3R6eW55b3R6eW55b3R6eW55b3R6eW55b3R6eW55b3R6eW55b3R6eW55/26FLdmIp6wJr91J44/giphy.gif" alt="Happy Dance">
         </div>
     </div>
-</div>
-<!-- JavaScript for handling mute button -->
-<script>
-    const video = document.getElementById('background-video');
-    const muteButton = document.getElementById('mute-button');
 
-    // Function to update mute button text
-    function updateMuteButton() {
-        if (video.muted) {
-            muteButton.innerText = 'Unmute';
-        } else {
-            muteButton.innerText = 'Mute';
-        }
-    }
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionBox = document.getElementById('question-box');
+        const successMessage = document.getElementById('success-message');
 
-    // Event listener for mute button
-    muteButton.addEventListener('click', function() {
-        video.muted = !video.muted;
-        updateMuteButton();
-    });
+        // Logic to make the "No" button run away
+        noBtn.addEventListener('mouseover', () => {
+            // Get the window dimensions
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight;
 
-    // Initialize mute button text
-    updateMuteButton();
-</script>
+            // Calculate random positions
+            // We subtract 150 to ensure the button doesn't go off the very edge
+            const randomX = Math.random() * (containerWidth - 150);
+            const randomY = Math.random() * (containerHeight - 150);
+
+            // Apply the new position
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        // Logic for clicking "Yes"
+        yesBtn.addEventListener('click', () => {
+            questionBox.style.display = 'none'; // Hide the question
+            successMessage.style.display = 'block'; // Show the happy message
+        });
+    </script>
+
 </body>
 </html>
