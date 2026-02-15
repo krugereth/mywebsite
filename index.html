@@ -59,6 +59,7 @@
             border: none; border-radius: 30px; cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.2s, background-color 0.2s;
+            max-width: 80%; /* Ensures text doesn't overflow on small screens */
         }
         #music-btn:hover { transform: scale(1.05); background-color: #ff758f; }
 
@@ -208,12 +209,26 @@
         
         const body = document.body;
 
-        // --- MUSIC SWITCH LOGIC ---
+        // --- MUSIC SWITCH LOGIC (TOGGLE) ---
+        let isAltPlaying = false; // Tracks if "Kiss of Life" is playing
+
         musicBtn.addEventListener('click', () => {
-            bgAudio.pause();          // Stop Flashing Lights
-            bgAudio.currentTime = 0; 
-            altAudio.play();          // Start Kiss of Life
-            musicBtn.style.display = 'none'; // Hide button after clicking
+            if (!isAltPlaying) {
+                // Switch to Kiss of Life
+                bgAudio.pause();
+                altAudio.currentTime = 0; 
+                altAudio.play();
+                musicBtn.innerText = "click again if you wanna go back to a masterpiece 😌";
+                isAltPlaying = true;
+            } else {
+                // Switch back to Flashing Lights
+                altAudio.pause();
+                bgAudio.currentTime = 0;
+                bgAudio.play();
+                musicBtn.innerText = "i know you ur a gimmick man so click here if u dont like the song 🎧";
+                isAltPlaying = false;
+            }
+            // Button intentionally does NOT disappear
         });
 
         // --- FIXED HOLD LOGIC ---
@@ -262,8 +277,13 @@
             startScreen.style.opacity = '0';
             setTimeout(() => { startScreen.style.display = 'none'; }, 500);
             mainContainer.style.display = 'block';
-            // Play default audio unless swapped already (unlikely at this stage)
-            bgAudio.play();
+            
+            // Resume whichever song is "active" (usually default at start)
+            if(isAltPlaying) {
+                altAudio.play();
+            } else {
+                bgAudio.play();
+            }
         }
 
         noBtn.addEventListener('mouseover', () => {
