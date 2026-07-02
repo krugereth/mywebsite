@@ -131,12 +131,14 @@ h1 {
 }
 
 .main-nav a:hover,
-.main-nav a:focus {
+.main-nav a:focus,
+.main-nav a.active {
     color: var(--text);
 }
 
 .main-nav a:hover span,
-.main-nav a:focus span {
+.main-nav a:focus span,
+.main-nav a.active span {
     width: 64px;
     background: var(--text);
 }

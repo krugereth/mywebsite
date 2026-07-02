@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Patel | Coder Portfolio</title>
+    <title>Ayush Patel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +12,6 @@
     <main class="site-shell">
         <header class="hero">
             <div>
-                <p class="eyebrow">Coder Portfolio</p>
                 <h1>Ayush Patel</h1>
                 <h2>Software Developer</h2>
                 <p class="summary">
@@ -21,10 +20,10 @@
             </div>
 
             <nav class="main-nav" aria-label="Portfolio sections">
-                <a href="#about"><span></span>About</a>
-                <a href="#projects"><span></span>Projects</a>
-                <a href="#education"><span></span>Education</a>
-                <a href="#other"><span></span>Other</a>
+                <a class="active" href="#about" data-section="about"><span></span>About</a>
+                <a href="#projects" data-section="projects"><span></span>Projects</a>
+                <a href="#education" data-section="education"><span></span>Education</a>
+                <a href="#other" data-section="other"><span></span>Other</a>
             </nav>
 
             <div class="social-links" aria-label="Social links">
@@ -114,5 +113,29 @@
             </section>
         </div>
     </main>
+
+    <script>
+        const navLinks = document.querySelectorAll(".main-nav a");
+        const sections = document.querySelectorAll(".content section");
+
+        const setActiveLink = (sectionId) => {
+            navLinks.forEach((link) => {
+                link.classList.toggle("active", link.dataset.section === sectionId);
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, {
+            rootMargin: "-35% 0px -55% 0px",
+            threshold: 0
+        });
+
+        sections.forEach((section) => observer.observe(section));
+    </script>
 </body>
 </html>
