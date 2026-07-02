@@ -57,17 +57,18 @@ p {
 }
 
 .site-shell {
-    display: grid;
-    grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
-    gap: clamp(48px, 8vw, 120px);
+    --sidebar-width: min(430px, 38vw);
+    --column-gap: clamp(48px, 8vw, 120px);
     width: min(1120px, 90vw);
     margin: 0 auto;
 }
 
 .hero {
-    position: sticky;
+    position: fixed;
+    left: max(5vw, calc((100vw - 1120px) / 2));
     top: 0;
-    min-height: 100vh;
+    width: var(--sidebar-width);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     padding: 96px 0;
@@ -164,6 +165,8 @@ h1 {
 }
 
 .content {
+    width: calc(100% - var(--sidebar-width) - var(--column-gap));
+    margin-left: calc(var(--sidebar-width) + var(--column-gap));
     padding: 96px 0;
 }
 
@@ -255,6 +258,8 @@ section > p + p {
 
     .hero {
         position: static;
+        width: auto;
+        height: auto;
         min-height: auto;
         padding: 64px 0 36px;
     }
@@ -264,6 +269,8 @@ section > p + p {
     }
 
     .content {
+        width: auto;
+        margin-left: 0;
         padding: 36px 0 64px;
     }
 
