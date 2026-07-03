@@ -205,10 +205,17 @@ section > p + p {
     transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
-.item-card:hover {
+.item-card:hover,
+.item-card:focus {
     transform: translateY(-2px);
     border-color: var(--line);
     background: var(--panel-hover);
+    outline: none;
+}
+
+.item-card:hover h3,
+.item-card:focus h3 {
+    color: var(--accent);
 }
 
 .item-year {
@@ -220,6 +227,18 @@ section > p + p {
     color: var(--text);
     font-size: 1.05rem;
     line-height: 1.35;
+}
+
+.link-arrow {
+    display: inline-block;
+    margin-left: 4px;
+    color: currentColor;
+    transition: transform 160ms ease;
+}
+
+.item-card:hover .link-arrow,
+.item-card:focus .link-arrow {
+    transform: translate(3px, -3px);
 }
 
 .item-card p {
