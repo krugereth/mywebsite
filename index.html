@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayush Patel</title>
+    <script>
+        const savedTheme = localStorage.getItem("theme");
+        const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+        <span class="theme-toggle__track" aria-hidden="true">
+            <span class="theme-toggle__icon theme-toggle__icon--sun"></span>
+            <span class="theme-toggle__icon theme-toggle__icon--moon"></span>
+            <span class="theme-toggle__thumb"></span>
+        </span>
+    </button>
+
     <main class="site-shell">
         <header class="hero">
             <div>
@@ -148,8 +161,24 @@
     </main>
 
     <script>
+        const themeToggle = document.querySelector(".theme-toggle");
         const navLinks = document.querySelectorAll(".main-nav a");
         const sections = document.querySelectorAll(".content section");
+
+        const setTheme = (theme) => {
+            const isLight = theme === "light";
+            document.documentElement.dataset.theme = theme;
+            themeToggle.setAttribute("aria-pressed", String(isLight));
+            themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+            localStorage.setItem("theme", theme);
+        };
+
+        setTheme(document.documentElement.dataset.theme || "dark");
+
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+            setTheme(nextTheme);
+        });
 
         const setActiveLink = (sectionId) => {
             navLinks.forEach((link) => {
