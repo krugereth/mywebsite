@@ -145,6 +145,7 @@ h1 {
 
 .social-links {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 18px;
     margin-top: auto;
@@ -152,8 +153,11 @@ h1 {
 
 .social-links a,
 .resume-link {
+    display: inline-flex;
+    align-items: center;
     color: var(--soft);
     font-weight: 700;
+    line-height: 1;
     transition: color 160ms ease;
 }
 
@@ -260,11 +264,6 @@ section > p + p {
     font-size: 0.78rem;
     font-weight: 700;
     padding: 7px 12px;
-}
-
-.resume-link {
-    display: inline-block;
-    margin-top: 24px;
 }
 
 @media (max-width: 860px) {
